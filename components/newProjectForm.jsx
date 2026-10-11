@@ -6,21 +6,17 @@ import { MdDelete } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 
 
-const AddButton = ({ type }) => {
+const AddButton = ({ type, title }) => {
 
     const types = {
-        add: " flex items-center justify-center w-fit text-sm gap-3 border border-gray-300 rounded-lg text-blue-500 bg-white px-2 py-1 hover:border-blue-500 cursor-pointer",
-        cancel: "flex items-center justify-center border border-gray-300 rounded-lg text-sm bg-white px-4 py-2 hover:border-blue-500 hover:text-blue-500 cursor-pointer",
-        other: "flex items-center justify-center rounded-lg max-w-30 bg-blue-500 text-white px-4 py-2 hover:bg-blue-800 cursor-pointer",
+        outline: "flex items-center justify-center border border-gray-300 rounded-lg text-sm bg-white px-4 py-2 hover:border-blue-500 hover:text-blue-500 cursor-pointer",
+        normal: "flex items-center justify-center rounded-lg max-w-30 bg-blue-500 text-white px-4 py-2 hover:bg-blue-800 cursor-pointer",
     }
 
     return (
         <div className={`${types[type]}`}>
-            {
-                type === 'add' ? <FaPlus className="text-sm" /> : ""
-            }
             <p>
-                {type === 'add' ? "Add Task" : type === "cancel" ? "Cancel" : "Create Project"}
+                {title}
             </p>
         </div>
     )
@@ -73,32 +69,9 @@ const NewProjectForm = ({onClose}) => {
                             <label htmlFor="description" className="font-bold text-lg ">Description</label>
                             <textarea name="description" id="description" placeholder="A short description of your project" row={3} className="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none placeholder:text-gray-300 hover:border-blue-600 focus:border-blue-600 transition"></textarea>
                         </div>
-                        <div className="mb-4">
-                            <div className="flex items-center justify-between mb-3">
-                                <label htmlFor="" className="font-bold text-lg ">Tasks</label>
-                            </div>
-                            <div className="overflow-y-auto max-h-50 pr-1">
-                                {
-                                    tasks.map((task) => (
-                                        <div key={task.id} className="flex items-center gap-2 mb-2">
-                                            <input type="text" value={task.title} onChange={(e) => { handileTaskTitle(task.id, e.target.value) }} placeholder="type your task" className="flex-1 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none placeholder:text-gray-300 hover:border-blue-600 focus:border-blue-600 transition" />
-                                            <button className="cursor-pointer hover:text-red-500 hover:bg-gray-50 p-1 rounded-full" onClick={() => {
-                                                handleDeleteTask(task.id)
-                                            }}>
-                                                <MdDelete />
-                                            </button>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                            <button onClick={(e) => handleAddTask(e)} className="flex items-center gap-2 justify-center w-full border-2 border-dashed border-gray-300 cursor-pointer hover:text-blue-500 hover:border-blue-500 hover:bg-gray-50 rounded-lg p-2 text-lg text-gray-400">
-                                <FaPlus size={16} />
-                                Add more tasks
-                            </button>
-                        </div>
                         <div className="flex items-center justify-between">
-                            <AddButton type="cancel" />
-                            <AddButton type="other" />
+                            <AddButton type="outline" title={"Cancel"} />
+                            <AddButton type="normal" title={"Create Project"} />
                         </div>
                     </form>
                 </div>
