@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Patrick_Hand, } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/nav";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +26,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-<body className={`${patrickHand.className} min-h-full flex flex-col`}>        <Navbar />
-        {children}
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className={`${patrickHand.className} min-h-full flex flex-col`}>
+        <Suspense fallback={<div className="h-16" />}>
+          <Navbar />
+        </Suspense>
+        <div className="flex-grow">
+          {children}
+        </div>
       </body>
     </html>
   );
