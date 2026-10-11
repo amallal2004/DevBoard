@@ -1,9 +1,5 @@
 'use client'
-
-import { useState, useRef } from "react";
 import { IoClose } from "react-icons/io5";
-import { MdDelete } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
 
 
 const AddButton = ({ type, title }) => {
@@ -23,28 +19,6 @@ const AddButton = ({ type, title }) => {
 }
 
 const NewProjectForm = ({onClose}) => {
-
-    const [tasks, setTasks] = useState([
-        { id: 1, title: "" },
-        { id: 2, title: "" },
-        { id: 3, title: "" },
-    ])
-
-    const idRef = useRef(3)
-
-    const handileTaskTitle = (id, title) => {
-        setTasks(prevTasks => prevTasks.map(task => task.id === id ? { ...task, title } : task))
-    }
-
-    const handleDeleteTask = (id) => {
-        setTasks(prevTasks => prevTasks.filter(task => task.id !== id))
-    }
-
-    const handleAddTask = (e) => {
-        e.preventDefault()
-        idRef.current += 1
-        setTasks([...tasks, { id: idRef.current, title: "" }])
-    }
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
